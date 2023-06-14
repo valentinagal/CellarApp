@@ -34,6 +34,7 @@ namespace WineCellar.API
             app.ConfigureWineAPI();
             app.ConfigureUserAPI();
             app.ConfigureTagAPI();
+            app.ConfigureWineTagAPI();
 
             app.UseHttpsRedirection();
 

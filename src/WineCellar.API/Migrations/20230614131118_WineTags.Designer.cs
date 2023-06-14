@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WineCellar.API.Context;
@@ -11,9 +12,11 @@ using WineCellar.API.Context;
 namespace WineCellar.API.Migrations
 {
     [DbContext(typeof(WineCellarContext))]
-    partial class WineCellarContextModelSnapshot : ModelSnapshot
+    [Migration("20230614131118_WineTags")]
+    partial class WineTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

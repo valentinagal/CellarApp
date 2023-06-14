@@ -10,6 +10,9 @@ namespace WineCellar.API.Models
         public int Year { get; set; }
         public int Score { get; set; }
         public string Description { get; set; }
+
+        [ForeignKey("WineTag")]
         public ICollection<WineTag> Tags { get; set; }
+
     }
 }

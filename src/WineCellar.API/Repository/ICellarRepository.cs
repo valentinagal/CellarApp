@@ -18,6 +18,12 @@ namespace WineCellar.API.Repository
         Tag EditTag(Tag tag);
         Tag DeleteTag(Guid id);
 
+        IEnumerable<WineTag>GetAllWineTags();
+        WineTag GetWineTag(Guid id);
+        WineTag CreateWineTag(WineTag wineTag);
+        WineTag EditWineTag(WineTag wineTag);
+        WineTag DeleteWineTag(Guid id);
+
 
     }
 }

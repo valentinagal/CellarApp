@@ -45,7 +45,7 @@ namespace WineCellar.API.EndPoints
             try
             {
                 var NewTag = context.CreateTag(tag);
-                return NewTag != null ? Results.Created("https://localhost:7293/tag", tag) :  Results.NotFound();
+                return NewTag != null ? Results.Created("https://localhost:7293/tag", NewTag) :  Results.NotFound();
             }
             catch (Exception ex) 
             {
