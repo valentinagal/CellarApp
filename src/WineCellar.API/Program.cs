@@ -1,4 +1,8 @@
 
+using WineCellar.API.Context;
+using WineCellar.API.EndPoints;
+using WineCellar.API.Repository;
+
 namespace WineCellar.API
 {
     public class Program
@@ -10,6 +14,10 @@ namespace WineCellar.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+
+            builder.Services.AddScoped<ICellarRepository, CellarRepository>();
+            builder.Services.AddDbContext<WineCellarContext>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -23,10 +31,13 @@ namespace WineCellar.API
                 app.UseSwaggerUI();
             }
 
+            app.ConfigureWineAPI();
+            app.ConfigureUserAPI();
+            app.ConfigureTagAPI();
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

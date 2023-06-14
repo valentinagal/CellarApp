@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using WineCellar.API.Models;
 
 namespace WineCellar.API.Context
@@ -23,6 +24,17 @@ namespace WineCellar.API.Context
                 .WithOne(w => w.Tag)
                 .HasForeignKey(f => f.TagId);
 
+        }
+
+        private static string GetConnectionString()
+        {
+            string jsonSettings = File.ReadAllText("appsettings.json");
+            JObject configuration = JObject.Parse(jsonSettings);
+            return configuration["ConnectionStrings"]["DefaultConnectionString"].ToString();
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql(GetConnectionString());
         }
 
 
