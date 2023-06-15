@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿
 
-namespace WineCellar.API.Models
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WineCellar.API.Models.Users
 {
     public class User
     {

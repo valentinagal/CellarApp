@@ -1,4 +1,6 @@
-﻿namespace WineCellar.API.Models
+﻿using WineCellar.API.Models.WineTags;
+
+namespace WineCellar.API.Models.Tags
 {
     public class Tag
     {

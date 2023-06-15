@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using WineCellar.API.Repository;
+using WineCellar.API.Models.Users;
 
 namespace WineCellar.API.EndPoints
 {

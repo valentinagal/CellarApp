@@ -1,5 +1,9 @@
-﻿using WineCellar.API.Context;
-using WineCellar.API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using WineCellar.API.Context;
+using WineCellar.API.Models.Tags;
+using WineCellar.API.Models.Users;
+using WineCellar.API.Models.Wines;
+using WineCellar.API.Models.WineTags;
 
 namespace WineCellar.API.Repository
 {
@@ -11,11 +15,15 @@ namespace WineCellar.API.Repository
             _context = context;
         }
 
-        public Tag CreateTag(Tag tag)
+        public Tag CreateTag(CreateTag tag)
         {
-            _context.Tags.Add(tag);
+            var newTag = new Tag
+            {
+                Value = tag.Value
+            };
+            _context.Tags.Add(newTag);
             _context.SaveChanges();
-            return tag;
+            return newTag;
         }
 
         public Wine CreateWine(Wine wine)
@@ -56,9 +64,9 @@ namespace WineCellar.API.Repository
             return wineTag;
         }
 
-        public Tag EditTag(Tag tag)
+        public Tag EditTag(CreateTag tag)
         {
-            var CurrentTag = _context.Tags.SingleOrDefault(t => t.Id == tag.Id);
+            var CurrentTag = _context.Tags.SingleOrDefault(t => t.Value == tag.Value);
             CurrentTag.Value = tag.Value;
             _context.Tags.Update(CurrentTag);
             _context.SaveChanges();
@@ -95,7 +103,7 @@ namespace WineCellar.API.Repository
 
         public IEnumerable<Wine> GetAllWines()
         {
-            return _context.Wines.ToList();
+            return _context.Wines.Include(x => x.Tags).ThenInclude(x => x.Tag).ToList();
         }
 
         public IEnumerable<WineTag> GetAllWineTags()

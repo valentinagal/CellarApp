@@ -1,5 +1,6 @@
 ﻿using System;
 using WineCellar.API.Models;
+using WineCellar.API.Models.Wines;
 using WineCellar.API.Repository;
 
 namespace WineCellar.API.EndPoints

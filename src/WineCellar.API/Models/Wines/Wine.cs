@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using WineCellar.API.Models.WineTags;
 
-namespace WineCellar.API.Models
+namespace WineCellar.API.Models.Wines
 {
     public class Wine
     {

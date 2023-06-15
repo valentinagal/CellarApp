@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
-using WineCellar.API.Models;
+using WineCellar.API.Models.Tags;
+using WineCellar.API.Models.Users;
+using WineCellar.API.Models.Wines;
+using WineCellar.API.Models.WineTags;
 
 namespace WineCellar.API.Context
 {

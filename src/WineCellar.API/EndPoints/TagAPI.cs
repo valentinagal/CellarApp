@@ -1,4 +1,5 @@
 ﻿using WineCellar.API.Models;
+using WineCellar.API.Models.Tags;
 using WineCellar.API.Repository;
 
 namespace WineCellar.API.EndPoints
@@ -27,7 +28,7 @@ namespace WineCellar.API.EndPoints
             }
         }
 
-        private static IResult EditTag(Tag tag, ICellarRepository context)
+        private static IResult EditTag(CreateTag tag, ICellarRepository context)
         {
             try
             {
@@ -40,7 +41,7 @@ namespace WineCellar.API.EndPoints
             }
         }
 
-        private static IResult CreateTag(Tag tag, ICellarRepository context)
+        private static IResult CreateTag(CreateTag tag, ICellarRepository context)
         {
             try
             {

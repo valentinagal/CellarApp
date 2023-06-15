@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Http.Json;
 using WineCellar.API.Context;
 using WineCellar.API.EndPoints;
 using WineCellar.API.Repository;
@@ -22,6 +23,10 @@ namespace WineCellar.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.Configure<JsonOptions>(o => {
+                o.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles; 
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -34,7 +39,6 @@ namespace WineCellar.API
             app.ConfigureWineAPI();
             app.ConfigureUserAPI();
             app.ConfigureTagAPI();
-            app.ConfigureWineTagAPI();
 
             app.UseHttpsRedirection();
 
