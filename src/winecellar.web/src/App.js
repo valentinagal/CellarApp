@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import WineCellar from './WineCellar/WineCellar';
+import TagList from './TagList/TagList';
 import './App.css';
 
 function App() {
+  const [wines, setWines] = useState([]);
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://localhost:7293/wine')
+    .then(response => {
+      setWines(response.data);
+    });
+
+    axios.get('https://localhost:7293/tag')
+    .then(response => {
+      setTags(response.data);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <WineCellar wines={wines}/>
+      <TagList tags={tags}/>
+      </div>
   );
 }
 

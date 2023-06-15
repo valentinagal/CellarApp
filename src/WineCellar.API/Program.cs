@@ -16,6 +16,17 @@ namespace WineCellar.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecific",
+                builder =>
+                {
+                    builder
+                    .WithOrigins("http://localhost:3000")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
+            });
             builder.Services.AddScoped<ICellarRepository, CellarRepository>();
             builder.Services.AddDbContext<WineCellarContext>();
 
@@ -34,6 +45,7 @@ namespace WineCellar.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseCors("AllowSpecific");
             }
 
             using (var scope = app.Services.CreateScope())
