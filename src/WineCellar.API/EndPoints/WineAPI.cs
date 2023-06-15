@@ -30,7 +30,7 @@ namespace WineCellar.API.EndPoints
             }
         }
 
-        private static IResult EditWine(Wine wine, ICellarRepository context)
+        private static IResult EditWine(CreateWine wine, ICellarRepository context)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace WineCellar.API.EndPoints
             }
         }
 
-        private static IResult CreateWine(Wine wine, ICellarRepository context)
+        private static IResult CreateWine(CreateWine wine, ICellarRepository context)
         {
             try
             {
@@ -81,19 +81,6 @@ namespace WineCellar.API.EndPoints
             }
             catch(Exception ex)
             { 
-                return Results.Problem(ex.Message);
-            }
-        }
-
-        private static IResult GetFilterWines(string filter, ICellarRepository context)
-        {
-            try
-            {
-                var wines = context.GetAllWines().Where(w => w.Description.Contains(filter)).ToList() ;
-                return Results.Ok(wines);
-            }
-            catch (Exception ex)
-            {
                 return Results.Problem(ex.Message);
             }
         }

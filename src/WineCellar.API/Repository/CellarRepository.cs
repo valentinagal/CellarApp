@@ -26,11 +26,19 @@ namespace WineCellar.API.Repository
             return newTag;
         }
 
-        public Wine CreateWine(Wine wine)
+        public Wine CreateWine(CreateWine wine)
         {
-            _context.Wines.Add(wine);
+            var newWine = new Wine
+            {
+                Name = wine.Name,
+                WineMaker = wine.WineMaker,
+                Year = wine.Year,
+                Score = wine.Score,
+                Description = wine.Description,
+            };
+            _context.Wines.Add(newWine);
             _context.SaveChanges();
-            return wine;
+            return newWine;
         }
 
         public WineTag CreateWineTag(WineTag wineTag)
@@ -73,9 +81,9 @@ namespace WineCellar.API.Repository
             return CurrentTag;
         }
 
-        public Wine EditWine(Wine wine)
+        public Wine EditWine(CreateWine wine)
         {
-            var CurrentWine = _context.Wines.SingleOrDefault(w => w.Id == wine.Id);
+            var CurrentWine = _context.Wines.SingleOrDefault(w => w.Name == wine.Name);
             CurrentWine.Name = wine.Name;
             CurrentWine.WineMaker = wine.WineMaker;
             CurrentWine.Year = wine.Year;
