@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WineCellar.API.Context;
+using WineCellar.API.Data;
 using WineCellar.API.Models.Tags;
 using WineCellar.API.Models.Users;
 using WineCellar.API.Models.Wines;

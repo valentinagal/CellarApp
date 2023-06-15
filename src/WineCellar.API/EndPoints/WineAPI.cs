@@ -14,7 +14,6 @@ namespace WineCellar.API.EndPoints
             application.MapPost("/wine", CreateWine);
             application.MapPut("wine", EditWine);
             application.MapDelete("/wine/{id}", DeleteWine);
-            application.MapGet("/wine/{filter}", GetFilterWines);
         }
 
         private static IResult DeleteWine(Guid id, ICellarRepository context)

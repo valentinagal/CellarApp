@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Http.Json;
-using WineCellar.API.Context;
+using WineCellar.API.Data;
+using WineCellar.API.Data;
 using WineCellar.API.EndPoints;
 using WineCellar.API.Repository;
 
@@ -15,7 +16,6 @@ namespace WineCellar.API
             // Add services to the container.
 
             builder.Services.AddControllers();
-
             builder.Services.AddScoped<ICellarRepository, CellarRepository>();
             builder.Services.AddDbContext<WineCellarContext>();
 
@@ -34,6 +34,13 @@ namespace WineCellar.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<WineCellarContext>();
+                DbInitializer.Initialize(context);
             }
 
             app.ConfigureWineAPI();

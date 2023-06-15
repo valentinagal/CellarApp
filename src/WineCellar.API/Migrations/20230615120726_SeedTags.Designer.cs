@@ -12,8 +12,8 @@ using WineCellar.API.Data;
 namespace WineCellar.API.Migrations
 {
     [DbContext(typeof(WineCellarContext))]
-    [Migration("20230614131118_WineTags")]
-    partial class WineTags
+    [Migration("20230615120726_SeedTags")]
+    partial class SeedTags
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace WineCellar.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("WineCellar.API.Models.Tag", b =>
+            modelBuilder.Entity("WineCellar.API.Models.Tags.Tag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace WineCellar.API.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("WineCellar.API.Models.User", b =>
+            modelBuilder.Entity("WineCellar.API.Models.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,7 +58,31 @@ namespace WineCellar.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WineCellar.API.Models.Wine", b =>
+            modelBuilder.Entity("WineCellar.API.Models.WineTags.WineTag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("WineId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("WineTag")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TagId");
+
+                    b.HasIndex("WineId");
+
+                    b.ToTable("WineTags");
+                });
+
+            modelBuilder.Entity("WineCellar.API.Models.Wines.Wine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,39 +111,15 @@ namespace WineCellar.API.Migrations
                     b.ToTable("Wines");
                 });
 
-            modelBuilder.Entity("WineCellar.API.Models.WineTag", b =>
+            modelBuilder.Entity("WineCellar.API.Models.WineTags.WineTag", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("TagId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("WineId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("WineTag")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TagId");
-
-                    b.HasIndex("WineId");
-
-                    b.ToTable("WineTags");
-                });
-
-            modelBuilder.Entity("WineCellar.API.Models.WineTag", b =>
-                {
-                    b.HasOne("WineCellar.API.Models.Tag", "Tag")
+                    b.HasOne("WineCellar.API.Models.Tags.Tag", "Tag")
                         .WithMany("Wines")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WineCellar.API.Models.Wine", "Wine")
+                    b.HasOne("WineCellar.API.Models.Wines.Wine", "Wine")
                         .WithMany("Tags")
                         .HasForeignKey("WineId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -130,12 +130,12 @@ namespace WineCellar.API.Migrations
                     b.Navigation("Wine");
                 });
 
-            modelBuilder.Entity("WineCellar.API.Models.Tag", b =>
+            modelBuilder.Entity("WineCellar.API.Models.Tags.Tag", b =>
                 {
                     b.Navigation("Wines");
                 });
 
-            modelBuilder.Entity("WineCellar.API.Models.Wine", b =>
+            modelBuilder.Entity("WineCellar.API.Models.Wines.Wine", b =>
                 {
                     b.Navigation("Tags");
                 });

@@ -5,7 +5,7 @@ using WineCellar.API.Models.Users;
 using WineCellar.API.Models.Wines;
 using WineCellar.API.Models.WineTags;
 
-namespace WineCellar.API.Context
+namespace WineCellar.API.Data
 {
     public class WineCellarContext : DbContext
     {
@@ -26,7 +26,6 @@ namespace WineCellar.API.Context
                 .HasMany(t => t.Wines)
                 .WithOne(w => w.Tag)
                 .HasForeignKey(f => f.TagId);
-
         }
 
         private static string GetConnectionString()
