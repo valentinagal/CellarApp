@@ -35,6 +35,7 @@ namespace WineCellar.API.Repository
                 Year = wine.Year,
                 Score = wine.Score,
                 Description = wine.Description,
+                ImageURL = wine.ImageURL,
             };
             _context.Wines.Add(newWine);
             _context.SaveChanges();
@@ -89,6 +90,7 @@ namespace WineCellar.API.Repository
             CurrentWine.Year = wine.Year;
             CurrentWine.Score = wine.Score;
             CurrentWine.Description = wine.Description;
+            CurrentWine.ImageURL = wine.ImageURL;
             _context.Wines.Update(CurrentWine);
             _context.SaveChanges();
             return CurrentWine;

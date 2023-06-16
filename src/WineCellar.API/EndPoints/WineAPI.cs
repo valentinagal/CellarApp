@@ -47,7 +47,7 @@ namespace WineCellar.API.EndPoints
             try
             {
                 var NewWine = context.CreateWine(wine);
-                return NewWine != null ? Results.Created("https://localhost:7293/wine", wine) : Results.NotFound();            }
+                return NewWine != null ? Results.Created("https://localhost:7293/wine", NewWine) : Results.NotFound();            }
             catch (Exception ex)
             {
                 return Results.Problem(ex.Message);
