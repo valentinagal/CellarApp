@@ -1,30 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import WineCellar from './WineCellar/WineCellar';
-import TagList from './TagList/TagList';
+import Wine from './Wine/Wine';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
   const [wines, setWines] = useState([]);
-  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     axios.get('https://localhost:7293/wine')
-    .then(response => {
-      setWines(response.data);
-    });
-
-    axios.get('https://localhost:7293/tag')
-    .then(response => {
-      setTags(response.data);
-    });
+      .then(response => {
+        setWines(response.data);
+      });
   }, []);
 
   return (
-    <div className="App">
-      <WineCellar wines={wines}/>
-      <TagList tags={tags}/>
-      </div>
+    <Router>
+      <Routes>
+      <Route path="/cellar" element={<WineCellar wines={wines} />} />
+        <Route path="/wine/:id" element={<Wine />} />
+      </Routes>
+    </Router>
   );
 }
 
