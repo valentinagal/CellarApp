@@ -1,26 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import Button from "react-bootstrap/Button";
+import WineCellar from "../WineCellar/WineCellar";
+import { Link } from "react-router-dom";
 
 function Wine({ match }) {
   const [wine, setWine] = useState(null);
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`https://localhost:7293/wine/${id}`)
-      .then(response => {
-        setWine(response.data);
+    axios.get(`https://localhost:7293/wine/${id}`).then((wineResponse) => {
+      axios.get("https://localhost:7293/tag").then((tagResponse) => {
+        setWine({
+          ...wineResponse.data,
+          tags: tagResponse.data.filter((t) =>
+            wineResponse.data.tags.some((x) => x.tagId === t.id)
+          ),
+        });
       });
+    });
   }, [id]);
 
-  if (!wine) return 'Loading...'; 
+  if (!wine) return "Loading...";
 
   return (
     <div>
-      <h2>{wine.name} by {wine.wineMaker}</h2>
-      <h4>{wine.year} {}</h4>
-  
-
+      <Card style={{ width: "25rem" }}>
+        <Card.Img variant="top" src={wine.imageURL} />
+        <Card.Body>
+          <Card.Title>
+            {wine.name} {wine.wineMaker}
+          </Card.Title>
+          <Card.Text>{wine.year}</Card.Text>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroup.Item>Rating is {wine.score}</ListGroup.Item>
+          <ListGroup.Item>{wine.description}</ListGroup.Item>
+          <ListGroup.Item>{wine.tags.map(x => <span>{x.value}<br/></span>)}</ListGroup.Item>
+        </ListGroup>
+      </Card>
+      <Link to={`../#home`}>
+        <Button variant="outline-secondary">Go back to Cellar</Button>
+      </Link>
     </div>
   );
 }

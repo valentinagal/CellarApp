@@ -4,21 +4,15 @@ import WineCellar from "./WineCellar/WineCellar";
 import Wine from "./Wine/Wine";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import CreateWine from "./Wine/CreateWine";
 
 function App() {
-  const [wines, setWines] = useState([]);
-
-  useEffect(() => {
-    axios.get("https://localhost:7293/wine").then((response) => {
-      setWines(response.data);
-    });
-  }, []);
-
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<WineCellar wines={wines} />} />
+        <Route path="/" element={<WineCellar/>} />
         <Route path="/wine/:id" element={<Wine />} />
+        <Route path="/create" element={<CreateWine/>} />
       </Routes>
     </Router>
   );

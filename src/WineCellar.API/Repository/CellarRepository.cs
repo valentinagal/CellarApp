@@ -36,6 +36,7 @@ namespace WineCellar.API.Repository
                 Score = wine.Score,
                 Description = wine.Description,
                 ImageURL = wine.ImageURL,
+                Tags = wine.Tags.Select(t => new WineTag {TagId = t}).ToList()
             };
             _context.Wines.Add(newWine);
             _context.SaveChanges();
@@ -125,7 +126,7 @@ namespace WineCellar.API.Repository
 
         public User? GetUser(Guid id) => _context.Users.Find(id);
 
-        public Wine? GetWine(Guid id) => _context.Wines.Find(id);
+        public Wine? GetWine(Guid id) => _context.Wines.Include(x => x.Tags).SingleOrDefault(a => a.Id == id);
 
         public WineTag? GetWineTag(Guid id) => _context.WineTags.Find(id);
     }
