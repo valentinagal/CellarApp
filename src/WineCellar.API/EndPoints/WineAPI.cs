@@ -12,7 +12,7 @@ namespace WineCellar.API.EndPoints
             application.MapGet("/wine", GetAllWines);
             application.MapGet("/wine/{id}", GetWine);
             application.MapPost("/wine", CreateWine);
-            application.MapPut("wine", EditWine);
+            application.MapPut("wine/{id}", EditWine);
             application.MapDelete("/wine/{id}", DeleteWine);
         }
 
@@ -29,11 +29,11 @@ namespace WineCellar.API.EndPoints
             }
         }
 
-        private static IResult EditWine(CreateWine wine, ICellarRepository context)
+        private static IResult EditWine(Guid id, CreateWine wine, ICellarRepository context)
         {
             try
             {
-                var NewWine = context.EditWine(wine);
+                var NewWine = context.EditWine(id, wine);
                 return NewWine != null ? Results.Ok(NewWine) : Results.NotFound();
             }
             catch (Exception ex)

@@ -13,7 +13,7 @@ namespace WineCellar.API.Repository
         IEnumerable<Wine> GetAllWines();
         Wine GetWine(Guid id);
         Wine CreateWine(CreateWine wine);
-        Wine EditWine(CreateWine wine);
+        Wine? EditWine(Guid id, CreateWine wine);
         Wine DeleteWine(Guid id);
 
         IEnumerable<Tag> GetAllTags();

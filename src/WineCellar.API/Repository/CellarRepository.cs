@@ -83,15 +83,17 @@ namespace WineCellar.API.Repository
             return CurrentTag;
         }
 
-        public Wine EditWine(CreateWine wine)
+        public Wine? EditWine(Guid id, CreateWine wine)
         {
-            var CurrentWine = _context.Wines.SingleOrDefault(w => w.Name == wine.Name);
+            var CurrentWine = _context.Wines.SingleOrDefault(w => w.Id == id);
+            if(CurrentWine == null) { return null; }
             CurrentWine.Name = wine.Name;
             CurrentWine.WineMaker = wine.WineMaker;
             CurrentWine.Year = wine.Year;
             CurrentWine.Score = wine.Score;
             CurrentWine.Description = wine.Description;
             CurrentWine.ImageURL = wine.ImageURL;
+            CurrentWine.Tags = wine.Tags.Select(t => new WineTag { TagId = t }).ToList();
             _context.Wines.Update(CurrentWine);
             _context.SaveChanges();
             return CurrentWine;

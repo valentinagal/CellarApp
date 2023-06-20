@@ -70,6 +70,11 @@ function WineCellar() {
                   >
                     Delete
                   </Button>
+                  <Link to={`/edit/wine/${wine.id}`}>
+                    <Button variant="outline-secondary" className="me-4">
+                      Edit
+                    </Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>
@@ -77,7 +82,9 @@ function WineCellar() {
         </Row>
       </div>
       <Link to={`/create`}>
-        <Button variant="outline-secondary">Add wine</Button>
+        <Button variant="outline-secondary" className="me-4">
+          Add wine
+        </Button>
       </Link>
     </div>
   );
