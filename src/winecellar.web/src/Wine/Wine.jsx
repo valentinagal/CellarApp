@@ -39,10 +39,17 @@ function Wine({ match }) {
         <ListGroup className="list-group-flush">
           <ListGroup.Item>Rating is {wine.score}</ListGroup.Item>
           <ListGroup.Item>{wine.description}</ListGroup.Item>
-          <ListGroup.Item>{wine.tags.map(x => <span>{x.value}<br/></span>)}</ListGroup.Item>
+          <ListGroup.Item>
+            {wine.tags.map((x) => (
+              <span>
+                {x.value}
+                <br />
+              </span>
+            ))}
+          </ListGroup.Item>
         </ListGroup>
       </Card>
-      <Link to={`../#home`}>
+      <Link to={`../wineCellar`}>
         <Button variant="outline-secondary">Go back to Cellar</Button>
       </Link>
     </div>
