@@ -11,6 +11,7 @@ function App() {
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<WineCellar />} />
         <Route path="/" element={<WineCellar />} />
         <Route path="/wine/:id" element={<Wine />} />
         <Route path="/create" element={<CreateWine />} />

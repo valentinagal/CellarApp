@@ -8,7 +8,9 @@ namespace WineCellar.API.Repository
 {
     public interface ICellarRepository
     {
+        IEnumerable<User>GetAllUsers();
         User GetUser(Guid id);
+        User CreateUser(CreateUser user);
 
         IEnumerable<Wine> GetAllWines();
         Wine GetWine(Guid id);

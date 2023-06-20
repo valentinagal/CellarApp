@@ -26,6 +26,19 @@ namespace WineCellar.API.Repository
             return newTag;
         }
 
+        public User CreateUser(CreateUser user)
+        {
+            var newUser = new User
+            {
+                UserName = user.UserName,
+                Email = user.Email,
+                Password = user.Password
+            };
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+            return newUser;
+        }
+
         public Wine CreateWine(CreateWine wine)
         {
             var newWine = new Wine
@@ -112,6 +125,11 @@ namespace WineCellar.API.Repository
         public IEnumerable<Tag> GetAllTags()
         {
             return _context.Tags.ToList();
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _context.Users.ToList();
         }
 
         public IEnumerable<Wine> GetAllWines()
