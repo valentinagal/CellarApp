@@ -168,7 +168,9 @@ function EditWine() {
         <br />
         <br />
         <br />
-        <button type="submit">Save Changes</button>
+        <Button variant="outline-secondary" type="submit">
+          Save Changes
+        </Button>
       </form>
     </div>
   );

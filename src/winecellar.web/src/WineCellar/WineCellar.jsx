@@ -4,13 +4,10 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
 import axios from "axios";
 
 function WineCellar() {
   const [currentWines, setCurrentWines] = useState([]);
-
   useEffect(() => {
     axios.get("https://localhost:7293/wine").then((response) => {
       setCurrentWines(response.data);
@@ -30,17 +27,6 @@ function WineCellar() {
 
   return (
     <div>
-      <Navbar>
-        <Container>
-          <Navbar.Brand href="#home">Wine Cellar</Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Signed in as: <a href="#login">User</a>
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
       <div className="wine-list">
         <Row xs={1} md={4} className="g-4">
           {currentWines.map((wine) => (

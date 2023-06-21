@@ -41,7 +41,7 @@ function Wine({ match }) {
           <ListGroup.Item>{wine.description}</ListGroup.Item>
           <ListGroup.Item>
             {wine.tags.map((x) => (
-              <span>
+              <span key={x.id}>
                 {x.value}
                 <br />
               </span>
@@ -49,7 +49,7 @@ function Wine({ match }) {
           </ListGroup.Item>
         </ListGroup>
       </Card>
-      <Link to={`../wineCellar`}>
+      <Link to={`/`}>
         <Button variant="outline-secondary">Go back to Cellar</Button>
       </Link>
     </div>
