@@ -149,7 +149,9 @@ function CreateWine() {
         <br />
         <br />
         <br />
-        <button type="submit">Add Wine</button>
+        <Button variant="outline-secondary" type="submit">
+          Add Wine
+        </Button>
       </form>
     </div>
   );

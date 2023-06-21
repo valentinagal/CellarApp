@@ -1,46 +1,70 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+
 function Login() {
   const [user, setUser] = useState([]);
-  const { id } = useParams();
+  const [profile, setProfile] = useState([]);
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: (error) => console.log("Login Failed:", error),
+  });
 
   useEffect(() => {
-    axios.get(`https://localhost:7293/user`).then((response) => {
-      setUser(response.data);
-    });
-  }, []);
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          setProfile(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
+
+  const logOut = () => {
+    googleLogout();
+    setProfile(null);
+  };
 
   return (
     <div>
-      <div>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Your Email: </InputGroup.Text>
-          <Form.Control
-            placeholder="Email"
-            aria-label="Email"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1">Your Password: </InputGroup.Text>
-          <Form.Control
-            placeholder="Password"
-            aria-label="Password"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-      </div>
-      <Link to={`/wineCellar`}>
-        <Button variant="outline-secondary" className="me-4">
-          Log In
+      <h2>Welcome in Wine Cellar</h2>
+      <br />
+      <br />
+      {profile ? (
+        <div>
+          <img src={profile.picture} alt="user image" />
+          <h5>Account Details: </h5>
+          <p>Name: {profile.name}</p>
+          <p>Email: {profile.email}</p>
+          <br />
+          <br />
+          <Link to={`../wineCellar`}>
+            <Button variant="outline-secondary">View Cellar</Button>
+          </Link>
+          <br />
+          <br />
+          <Button variant="outline-secondary" onClick={logOut}>
+            Log out
+          </Button>
+        </div>
+      ) : (
+        <Button variant="outline-secondary" onClick={() => login()}>
+          Sign in with Google 🚀{" "}
         </Button>
-      </Link>
+      )}
     </div>
   );
 }

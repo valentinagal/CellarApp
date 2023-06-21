@@ -23,7 +23,6 @@ function WineCellar() {
     );
     if (confirm) {
       axios.delete(`https://localhost:7293/wine/${wine.id}`).then(() => {
-        debugger;
         setCurrentWines((prev) => [...prev.filter((w) => w.id !== wine.id)]);
       });
     }
@@ -79,13 +78,40 @@ function WineCellar() {
               </Card>
             </Col>
           ))}
+          <Card>
+            <Card.Img
+              className="imgWineCard"
+              variant="top"
+              src="https://st2.depositphotos.com/38069286/44086/v/600/depositphotos_440862214-stock-illustration-add-icon-symbol-modern-simple.jpg"
+            />
+            <Card.Body>
+              <Card.Title>Add wine</Card.Title>
+              <br />
+              <Link to={`/create`}>
+                <Button variant="outline-secondary" className="me-4">
+                  Add wine
+                </Button>
+              </Link>
+            </Card.Body>
+          </Card>
         </Row>
       </div>
-      <Link to={`/create`}>
+      {/* <Link to={`/create`}>
+        <Button variant="outline-secondary" className="me-4">
+          Add wine
+        </Button>
+      </Link> */}
+      {/* <Card style={{ width: '10rem' }}>
+      <Card.Img variant="top" src="https://st2.depositphotos.com/38069286/44086/v/600/depositphotos_440862214-stock-illustration-add-icon-symbol-modern-simple.jpg" />
+      <Card.Body>
+        <Card.Title>Add wine</Card.Title>
+        <Link to={`/create`}>
         <Button variant="outline-secondary" className="me-4">
           Add wine
         </Button>
       </Link>
+      </Card.Body>
+    </Card> */}
     </div>
   );
 }
