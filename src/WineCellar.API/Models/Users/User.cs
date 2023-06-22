@@ -11,8 +11,5 @@ namespace WineCellar.API.Models.Users
         public string Email { get; set; }
         public string Password { get; set; }
 
-        //[ForeignKey("Wine")]
-        //public Guid WineId { get; set; }
-
     }
 }

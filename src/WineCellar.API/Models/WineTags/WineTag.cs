@@ -11,9 +11,7 @@ namespace WineCellar.API.Models.WineTags
         public Guid Id { get; set; }
         public Guid WineId { get; set; }
         public Guid TagId { get; set; }
-        //[JsonIgnore]
         public Wine Wine { get; set; }
-        //[JsonIgnore]
         public Tag Tag { get; set; }
     }
 }
