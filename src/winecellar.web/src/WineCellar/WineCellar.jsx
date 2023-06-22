@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 
+
 function WineCellar() {
   const [currentWines, setCurrentWines] = useState([]);
   useEffect(() => {
@@ -65,11 +66,13 @@ function WineCellar() {
             </Col>
           ))}
           <Card>
-            <Card.Img
-              className="imgWineCard"
-              variant="top"
-              src="https://st2.depositphotos.com/38069286/44086/v/600/depositphotos_440862214-stock-illustration-add-icon-symbol-modern-simple.jpg"
-            />
+            <Link to={`/create`}>
+              <Card.Img
+                className="imgWineCard"
+                variant="top"
+                src="https://st2.depositphotos.com/38069286/44086/v/600/depositphotos_440862214-stock-illustration-add-icon-symbol-modern-simple.jpg"
+              />
+            </Link>
             <Card.Body>
               <Card.Title>Add wine</Card.Title>
               <br />

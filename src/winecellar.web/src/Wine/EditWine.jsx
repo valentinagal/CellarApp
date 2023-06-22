@@ -6,6 +6,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useNavigate, useParams } from "react-router-dom";
 
+
 function EditWine() {
   const navigate = useNavigate();
   const { id } = useParams();

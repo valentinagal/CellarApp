@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
-import WineCellar from "../WineCellar/WineCellar";
 import { Link } from "react-router-dom";
+
 
 function Wine({ match }) {
   const [wine, setWine] = useState(null);
@@ -28,7 +28,7 @@ function Wine({ match }) {
 
   return (
     <div>
-      <Card style={{ width: "25rem" }}>
+      <Card style={{ width: "25rem", textAlign: "center" }}>
         <Card.Img variant="top" src={wine.imageURL} />
         <Card.Body>
           <Card.Title>
@@ -49,6 +49,8 @@ function Wine({ match }) {
           </ListGroup.Item>
         </ListGroup>
       </Card>
+      <br />
+      <br />
       <Link to={`/`}>
         <Button variant="outline-secondary">Go back to Cellar</Button>
       </Link>

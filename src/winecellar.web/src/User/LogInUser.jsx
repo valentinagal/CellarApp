@@ -15,9 +15,18 @@ function Login({ loginChanged }) {
   });
 
   return (
-    <Button variant="outline-secondary" onClick={() => login()}>
-      Sign in with Google 🚀{" "}
-    </Button>
+    <div
+      style={{
+        margin: 0,
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+      }}
+    >
+      <Button variant="outline-secondary" onClick={() => login()}>
+        Sign in with Google 🚀{" "}
+      </Button>
+    </div>
   );
 }
 
